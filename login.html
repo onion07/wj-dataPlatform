@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网金数据决策平台-登录</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ChangeIMG();
+            $("#txtUserName").focus();
+            $("#txtPassWord").attr("disabled", true);
+            $("#erroems").html("");
+        });
+
+        //登陆验证
+        function checkSubmit() {
+            var isOk = true;
+            var userId = $("#txtUserName").val();
+            var pwd = $("#txtPassWord").val();
+            var code = $("#txtCode").val();
+            if (userId == "请输入手机号" || userId == "") {
+                $("#erroems").html("手机号不能为空");
+                $("#txtUserName").focus();
+                return;
+            }
+            if (pwd == "请输入短信验证码" || pwd == "") {
+                $("#erroems").html("短信验证码不能为空");
+                $("#txtPassWord").focus();
+                return;
+            }
+            if (code == "请输入验证码" || code == "") {
+                $("#erroems").html("验证码不能为空");
+                $("#txtCode").focus();
+                ChangeIMG();
+                return;
+            }
+            var obj = {};
+            obj.mobile = userId;
+            obj.piccode = code;
+            obj.mgscode = pwd;
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "../../api/TUser/Login",
+                data:obj,
+                dataType: "json",
+                success: function (msg) {
+                    showErrorMsg(msg);
+                    ChangeIMG();
+                    isOk = msg == "";
+                },
+                error: function (e) {
+                    $("#erroems").val(e);
+                    ChangeIMG();
+                }
+            })
+        }
+        function showErrorMsg(msg) {
+            if (msg != "") {
+                var obj = {};
+                if (typeof msg != "object") {
+                    obj = JSON.parse(msg);
+                } else {
+                    obj = msg;
+                }
+               
+                if (obj.code != 1) {
+                    $("#erroems").html(obj.description);
+                } else {
+                    window.location.href = "index.html";
+                }
+            }
+            return false;
+        }
+        function ChangeIMG() {
+            $("#imgCode").attr("src", "GetImageCode.ashx?" + new Date());
+        }
+        function SendMsg()
+        {
+            var isOk = true;
+            var userId = $("#txtUserName").val();
+            if (userId == "请输入手机号" || userId == "") {
+                $("#erroems").html("手机号不能为空");
+                $("#txtUserName").focus();
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                async: false,
+                url: "Sms.ashx",
+                data: "mobile=" + userId+"&t="+new Date(),
+                dataType: "text",
+                success: function (msg) {
+                    $("#erroems").html(msg);
+                    isOk = msg == "";
+                }
+            })
+            if (isOk) {
+                $("#txtPassWord").removeAttr("disabled");
+                $('.getcode').attr('disabled', "true");
+                $('.getcode').css({background:"grey"});
+                Outdate(60);
+            } else {
+                $('.getcode').removeAttr('disabled');
+            }
+        }
+        function Outdate(i)
+        {
+            if (i <= 0) {
+                $('.getcode').removeAttr('disabled');
+                $(".getcode").text("获取验证码");
+                $('.getcode').css({ background: "#d5a80d" });
+                $("#txtPassWord").attr("disabled", true);
+            } else {
+                $(".getcode").text("剩余" + i + "秒");
+                i--;
+                setTimeout(function () { Outdate(i) }, 1000);
+            }
+        }
+    </script>
+    <style type="text/css">
+        .jstext {
+            color: #8d0000;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-bg">
+        <div class="bg bg-1"></div>
+        <div class="bg bg-2"></div>
+        <div class="bg bg-3"></div>
+
+        <div class="login-box">
+            <div class="title"><img src="img/title.png" alt="网金决策分析平台"></div>
+            <div class="input-box">
+                <div class="jstext" runat="server" id="erroems">
+                </div>
+                <div>
+                    <input type="text" id="txtUserName" class="input-style bg-input-1" placeholder="输入手机号码">
+                </div>
+                <div class="clear">
+                    <input type="text" id="txtPassWord" class="input-style bg-input-2" placeholder="手机验证码">
+                    <a href="javascript:SendMsg()" class="getcode">获取验证码</a>
+                </div>
+                <div class="clear">
+                    <input id="txtCode" type="text" class="input-style bg-input-2" placeholder="验证码">
+                    <a href="javascript:ChangeIMG()" class="code"><img id="imgCode" src="img/code.png" alt="验证码"></a>
+                </div>
+                <div>
+                    <a href="javascript:checkSubmit()" class="login-btn">登&nbsp;&nbsp;录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

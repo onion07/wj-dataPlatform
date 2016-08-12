@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1.0, user-scalable=no" name="viewport"/>
+
+    <title>资产运营分析平台</title>
+    <link rel="stylesheet" href="css/jquery.scrollbar.css">
+    <link rel="stylesheet" type="text/css" href="css/assetsopt.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/echarts-3.0.min.js"></script>
+    <script src="js/jquery.MyDigitClock.js"></script>
+
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="title">
+            <div>资产运营分析平台</div>
+            <div class="time" id="clock" data-id="clock"></div>
+        </div>
+        <!-- 左侧 -->
+        <div class="sidebar">
+            <div class="tit"><span>引入资产</span></div>
+            <div class="m-box border-bg">
+                <h3 id="tle">引入总金额：<span>0</span></h3>
+                <div id="scale0"></div>
+                <div class="outbox b1 scll auto-scll">
+                    <div id="outer1">
+                        <div id="scale"></div>
+                        <div class="label">
+                            <ul class="banks bb cur">
+                                <li><em>招行</em><span class="icon"></span></li>
+                                <li><em>华润</em><span class="icon"></span></li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-bg"></div>
+            </div>
+            <div class="m-box border-bg">
+                <div id="int-rate0"></div>
+                <div class="outbox b2 scll auto-scll">
+                    <div id="outer2">
+                        <div id="int-rate"></div>
+                        <div class="label">
+                            <ul class="banks bb cur">
+                                <li><em>招行</em><span class="icon"></span></li>
+                                <li><em>华润</em><span class="icon"></span></li>
+                                <li><em>浙商</em><span class="icon"></span></li>
+                                <li><em>青岛</em><span class="icon"></span></li>
+                                <li><em>尧都</em><span class="icon"></span></li>
+                                <li><em>广州农商</em><span class="icon"></span></li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-bg"></div>
+            </div>
+            <div class="m-box border-bg">
+                <div id="timeline"></div>
+                <div class="bottom-bg"></div>
+            </div>
+        </div>
+        <!-- 中间部分 -->
+        <div class="content">
+            <div class="tit tit2">资产分析汇总</div>
+            <div class="b-box border-bg pos2">
+                <div id="asset-size"></div>
+                <div id="seri1" class="seri">
+                    <em class="em-title">资产规模（元）</em>
+                    <span class="xzyre"><i class="icon-z"></i>新增引入额</span>
+                    <!-- <span class="yrpjll"><i class="icon-z"></i>引入平均利率</span> -->
+                    <span class="cl"><i class="icon-z"></i>存量</span>
+                </div>
+                <div id="seri2" class="seri">
+                    <span class="xzxse"><i class="icon-z"></i>新增销售额</span>
+                    <!-- <span class="scpjll"><i class="icon-z"></i>输出平均利率</span> -->
+                    <span class="lxxse"><i class="icon-z"></i>连续销售额</span>
+                </div>
+                <div class="bottom-bg"></div>
+            </div>
+            <div class="m-box border-bg pos">
+                <div id="tab-head">
+                    <span data-type="day">资产健康值</span>
+                    <span data-type="day" class="cur">毛利率</span>
+                </div>
+                <div class="tabCn">
+                    <div id="Asset-health"></div>
+                    <span class="zc">资产</span>
+                    <span class="zj">资金</span>
+                    
+                </div>
+                <div class="tabCn cur">
+                    <div id="profit-rate"></div>
+                    <div id="seri3">
+                        <p>累计营收额：<span>100,000,000</span></p>  
+                    </div>
+                </div>
+                <div class="bottom-bg"></div>
+            </div>
+        </div>
+        <!-- 右侧 -->
+        <div class="sidebar">
+            <div class="tit"><span>输出资产</span></div>
+            <div class="m-box border-bg">
+               <!--  <div id="outer3">
+                    <div id="sell-scale"></div>
+                    <h3 id="tle2">输出总金额：<span>0</span></h3>
+
+                    <div class="label">
+                        <ul class="banks bb cur">
+                            <li><em>招行</em><span class="icon"></span></li>
+                            <li><em>华润</em><span class="icon"></span></li>
+                            <li><em>浙商</em><span class="icon"></span></li>
+                            <li><em>青岛</em><span class="icon"></span></li>
+                            <li><em>尧都</em><span class="icon"></span></li>
+                            <li><em>广州农商</em><span class="icon"></span></li>
+                        </ul>
+                        
+                    </div>
+                </div> -->
+                <h3 id="tle2">输出总金额：<span>0</span></h3>    
+                <div id="sell-scale0"></div>
+                <div class="outbox b3 scll auto-scll">
+                    <div id="outer3">
+                        <div id="sell-scale"></div>
+                        <div class="label">
+                            <ul class="banks bb cur">
+                                <li><em>招行</em><span class="icon"></span></li>
+                                <li><em>华润</em><span class="icon"></span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-bg"></div>
+            </div>
+            <div class="m-box border-bg">
+                <div id="int-rate20"></div>
+                <div class="outbox b4 scll auto-scll">
+                    <div id="outer4">
+                        <div id="int-rate2"></div>
+                        <div class="label">
+                            <ul class="banks bb cur">
+                                <li><em>招行</em><span class="icon"></span></li>
+                                <li><em>华润</em><span class="icon"></span></li>
+                                <li><em>浙商</em><span class="icon"></span></li>
+                                <li><em>青岛</em><span class="icon"></span></li>
+                                <li><em>尧都</em><span class="icon"></span></li>
+                                <li><em>广州农商</em><span class="icon"></span></li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-bg"></div>
+            </div>
+            <div class="m-box border-bg">
+                <div id="timeline2"></div>
+                <div class="bottom-bg"></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="f-btn return"><a href="http://reportcenterapi.ucsmy.com/View/Web/index.html">返回</a></div>
+        <div class="f-btn lk"><span id="hs-lock">隐藏</span></div>
+        <ul class="date-selector">
+            <li class="cur" data-type="day"><a href="javascript:void(0);">今日</a></li>
+            <li data-type="week"><a href="javascript:void(0);">本周</a></li>
+            <li data-type="month"><a href="javascript:void(0);">本月</a></li>
+            <li data-type="year"><a href="javascript:void(0);">今年</a></li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+
+        $(function () {
+
+            // 获取银行名 对应标签li的宽度
+             window.liWidth = $('.label li').outerWidth();
+
+             $("#clock").MyDigitClock({
+                    fontFamily:"Arial",
+                    fontColor: "#a6f3ef"
+             });
+        });
+    </script>
+    <script src="js/init_ec.js" ></script>
+    <script src="js/grid.js" ></script>
+    <script src="js/_data6.js" defer></script>
+    <script src="js/comm.js" defer></script>
+</body>
+</html>

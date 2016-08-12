@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网金数据决策平台</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="js/iscroll.min.js"></script>
+    <script src="js/countUp.min.js"></script>
+    <script src="js/jquery.MyDigitClock.js"></script>
+</head>
+<body>
+<div class="wrap">
+    <div class="title">
+        <div>网金决策分析平台</div>
+        <div class="time" id="clock" data-id="clock"></div>
+    </div>
+    <div class="sub-trade-box">
+        <div class="trade">
+            <div class="money"><span>今日投资交易总额：</span><span id="count1">--亿--万--元</span><span class="icon up"></span></div>
+            <div class="money c-duan" style="display: none"><span class="space-ml">C端交易总额：</span><span id="count2">--万--元</span><span class="icon down"></span></div>
+            <div class="money b-duan" style="display: none"><span class="space-ml">B端交易总额：</span><span id="count3">--万</span><span class="icon up"></span></div>
+        </div>
+        <div class="container border-bg">
+            <div id="bankScroll" class="bank-scroll">
+                <div class="bank" id="bankBox">
+                    <ul>
+                        <li class="bank-item" data-bank="CMBC" data-logo="0">
+                            <a href="javascript://">
+                                <img src="img/bank-zh.png" alt=""/>
+                                <span>招商银行</span>
+                            </a>
+                        </li>
+                        <li class="bank-item" data-bank="CZ" data-logo="8">
+                            <a href="javascript://">
+                                <img src="img/bank-zs.png" alt=""/>
+                                <span>浙商银行</span>
+                            </a>
+                        </li>
+                        <li class="bank-item" data-bank="NB" data-logo="1">
+                            <a href="javascript://">
+                                <img src="img/bank-nb.png" alt=""/>
+                                <span>宁波银行</span>
+                            </a>
+                        </li>
+                        <li class="bank-item" data-bank="QD" data-logo="4">
+                            <a href="javascript://">
+                                <img src="img/bank-qd.png" alt=""/>
+                                <span>青岛银行</span>
+                            </a>
+                        </li>
+                        <li class="bank-item" data-bank="HR" data-logo="2">
+                            <a href="javascript://">
+                                <img src="img/bank-hr.png" alt=""/>
+                                <span>华润银行</span>
+                            </a>
+                        </li>
+                        <li class="bank-item" data-bank="YD" data-logo="6">
+                            <a href="javascript://">
+                                <img src="img/bank-yd.png" alt=""/>
+                                <span>尧都银行</span>
+                            </a>
+                        </li>
+                        <li class="bank-item" data-bank="JS" data-logo="3">
+                            <a href="javascript://">
+                                <img src="img/bank-js.png" alt=""/>
+                                <span>江苏银行</span>
+                            </a>
+                        </li>
+                        <li class="bank-item" data-bank="LZ" data-logo="5">
+                            <a href="javascript://">
+                                <img src="img/bank-lz.png" alt=""/>
+                                <span>兰州银行</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="prev"></div>
+                    <div class="next"></div>
+                </div>
+            </div>
+            <div class="container-r">
+                <div class="main-graph">
+                    <div class="flex-box">
+                        <div class="left-arrow" style="visibility: hidden"><a href="javascript://"></a></div>
+                        <div class="graph-container">
+                            <ul>
+                                <li><div id="lineChart_1" style="height: 100%;"></div></li>
+                                <!--<li><div id="lineChart_2" style="height: 100%;"></div></li>-->
+                                <!--<li><div id="lineChart_3" style="height: 100%;"></div></li>-->
+                            </ul>
+                        </div>
+                        <div class="right-arrow" style="visibility: hidden"><a href="javascript://"></a></div>
+                    </div>
+
+                </div>
+                <div class="foot-graph">
+                    <ul class="convert">
+                        <!--<li class="convert-item active"><a href="javascript://">本日交易额：<span>56,884.632</span>万元</a></li>-->
+                        <li class="convert-item"><a href="javascript://">平均收益率：<span id="count7">--</span>%</a></li>
+                        <li class="convert-item"><a href="javascript://">平均期限：<span id="count8">--</span>天</a></li>
+                        <li class="convert-item"><a href="javascript://">平均每笔交易金额： <span id="count9">--</span>万元</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bottom-bg"></div>
+        </div>
+    </div>
+    <div class="under-box">
+        <div class="line-bar-box">
+            <div class="under-out">
+                <div class="echart-title">平均年化收益率</div>
+                <div id="line_1" style="height: 100%"></div>
+            </div>
+        </div>
+        <div class="line-bar-box">
+            <div class="under-out">
+                <div class="echart-title">发布项目数</div>
+                <div id="line_2" style="height: 100%"></div>
+            </div>
+        </div>
+        <div class="line-bar-box" style="position: relative;">
+            <div class="under-out">
+                <div class="echart-title">交易播报</div>
+            </div>
+            <div id="map"class="map-box" style="position: absolute;top:5%;bottom:5%;left:10%;right: 5%"></div>
+            <div class="trade-msg">
+                <div class="tranding"><b id="UserNumber">今日</b>投资人数<br><span id="count10">--</span>人</div>
+                <div class="tranding">累计投资人数<br><span id="count11">--</span>人</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="wrap">
+        <a href="index.html" class="back"><i class="icon-left"></i>返回</a>
+        <ul class="date-selector">
+            <li class="cur" data-type="day"><a href="javascript://">今日</a></li>
+            <li data-type="week"><a href="javascript://">本周</a></li>
+            <li data-type="month"><a href="javascript://">本月</a></li>
+            <li data-type="year"><a href="javascript://">今年</a></li>
+        </ul>
+    </div>
+</div>
+
+<script src="build/dist/echarts.js"></script>
+<script src="js/comm.js"></script>
+<script src="js/subpage.js"></script>
+<script src="js/myChart2.js"></script>
+</body>
+</html>
